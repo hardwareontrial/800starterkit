@@ -1,0 +1,22 @@
+//  ================================================================================================
+//  ? TIP:  It is recommended to use this file for overriding bootstrap variables.
+//  ================================================================================================
+
+$primary: #048cdb;
+$info: #00ccff;
+$success: #33cc33;
+$danger: #E5381A;
+$warning: #ffcc00;
+
+$font-family-sans-serif: 'Rubik', sans-serif;
+$font-family-monospace: 'Roboto', monospace;
+
+html {
+  font-size: 85%;
+
+  body {
+    .horizontal-layout.navbar-floating .header-navbar-shadow {
+      height: 70px;
+    }
+  }
+}
