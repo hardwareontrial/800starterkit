@@ -8,7 +8,8 @@ class SocketIOService {
 
   initialize() {
     try {
-      const socket = io(`http://${process.env.VUE_APP_WEBSOCKET_URL}:${process.env.VUE_APP_WEBSOCKET_PORT}`,{
+      // const socket = io(`http://${process.env.VUE_APP_WEBSOCKET_URL}:${process.env.VUE_APP_WEBSOCKET_PORT}`,{
+        const socket = io(`http://${process.env.VUE_APP_WEBSOCKET_URL}`,{
         transports: ['websocket'],
         path: '/socket.io',
       });
