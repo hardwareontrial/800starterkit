@@ -32,7 +32,6 @@ class HRServices {
       await AppServices.init()
       const token = AppServices.getToken()
       const prefix = AppServices.getPrefix()
-
       const creatingForm = {
         id: payload.id,
         unique_str: payload.unique_str,
@@ -43,14 +42,11 @@ class HRServices {
         employeeIds: JSON.stringify(payload.users),
         isActive: JSON.stringify(payload.isActive),
       }
-
       const response = await http.post(`${prefix}/${this.routename}/position/create`, creatingForm, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       await this.getPositionAll()
       await this.getDeptsAll()
-
       return response.data
     } catch (error) {
       throw error
@@ -73,14 +69,12 @@ class HRServices {
         employeeIds: JSON.stringify(payload.users),
         isActive: JSON.stringify(payload.isActive),
       }
-
       const response = await http.put(`${prefix}/${this.routename}/position/${payload.id}/update`, updatingForm, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       await this.getPositionAll()
       await this.getDeptsAll()
-
+      // 
     } catch (error) {
       throw error
     }
@@ -91,7 +85,6 @@ class HRServices {
     if(!form.name) errors.push('Nama tidak boleh kosong.');
     if(!form.level) errors.push('Pilih salah satu level posisi.');
     if(!form.department_id) errors.push('Pilih salah satu departemen.');
-    
     return { success: errors.length === 0, message: errors }
   };
   // End Position
@@ -105,13 +98,11 @@ class HRServices {
       const response = await http.get(`${prefix}/${this.routename}/dept/all`, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-
       if(response.data.success) {
         if(response.data.data) {
           store.commit('migis/hr/SET_DEPTS', response.data.data)
         }
       }
-
       return response.data
     } catch (error) {
       throw error
@@ -123,21 +114,17 @@ class HRServices {
       await AppServices.init()
       const token = AppServices.getToken()
       const prefix = AppServices.getPrefix()
-
       const creatingForm = {
         id: payload.id,
         name: payload.name.toUpperCase(),
         isActive: JSON.stringify(payload.isActive),
         positions: JSON.stringify(payload.positions_id)
       };
-      
       const response = await http.post(`${prefix}/${this.routename}/dept/create`, creatingForm, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       await this.getDeptsAll()
       await this.getPositionAll()
-
       return response.data
     } catch (error) {
       throw error
@@ -149,7 +136,6 @@ class HRServices {
       const response = await http.get(`${prefix}/${this.routename}/dept/${payload.id}/detail`, creatingForm, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       return response.data
     } catch (error) {
       throw error
@@ -161,21 +147,17 @@ class HRServices {
       await AppServices.init()
       const token = AppServices.getToken()
       const prefix = AppServices.getPrefix()
-
       const updatingForm = {
         id: payload.id,
         name: payload.name.toUpperCase(),
         isActive: JSON.stringify(payload.isActive),
         positions: JSON.stringify(payload.positions_id)
       };
-      
       const response = await http.put(`${prefix}/${this.routename}/dept/${payload.id}/update`, updatingForm, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       await this.getDeptsAll()
       await this.getPositionAll()
-
       return response.data
     } catch (error) {
       throw error
@@ -184,9 +166,7 @@ class HRServices {
 
   validatorDept(formDept) {
     const errors = [];
-
     if(!formDept.name) errors.push('Nama tidak boleh kosong');
-
     return { success: errors.length === 0, message: errors }
   };
   // End Department
@@ -205,7 +185,6 @@ class HRServices {
       const response = await http.post(`${prefix}/${this.routename}/attn/sync`, form, {
         headers: {Authorization: token ? `Bearer ${token}` : ''},
       });
-      
       return response.data
     } catch (error) {
       throw error
@@ -261,16 +240,13 @@ class HRServices {
 
   validatorAttn(form) {
     const errors = []
-
     if(!form.start_time) {errors.push('Tentukan tanggal dan waktu dimulai.')}
     if(!form.end_time) {errors.push('Tentukan tanggal dan waktu diakhiri.')}
-
     if(form.start_time && form.end_time) {
       const start = moment(form.start_time, 'YYYY-MM-DD HH:mm')
       const end = moment(form.end_time, 'YYYY-MM-DD HH:mm')
       const startHour = start.hour()
       const endHour = end.hour()
-
       if(!end.isAfter(start)) {errors.push('Jam berakhir harus lebih dari jam mulai.')}
     }
     return { success: errors.length === 0, message: errors }
