@@ -73,14 +73,14 @@
         label-for="frm-okm-material-desc"
       >
         <template #label>
-          <span>Deskripsi<span class="text-danger">*</span> :</span>
+          <span>Sinopsis<span class="text-danger">*</span> :</span>
         </template>
         <b-form-textarea
           rows="3"
           max-rows="8"
           id="frm-okm-material-desc"
           :disabled="processing"
-          v-model="formMaterial.description"
+          v-model="formMaterial.sinopsis"
         />
       </b-form-group>
     </b-col>
@@ -97,6 +97,22 @@
           accept="application/pdf"
           :disabled="processing"
           v-model="formMaterial.file"
+        />
+      </b-form-group>
+    </b-col>
+    <b-col cols="12">
+      <b-form-group
+        label-for="frm-okm-material-desc"
+      >
+        <template #label>
+          <span>Deskripsi :</span>
+        </template>
+        <b-form-textarea
+          rows="3"
+          max-rows="8"
+          id="frm-okm-material-desc"
+          :disabled="processing"
+          v-model="formMaterial.description"
         />
       </b-form-group>
     </b-col>
@@ -129,6 +145,7 @@ export default {
         description: '',
         file: null,
         isActive: true,
+        sinopsis: '',
       },
       optionsLevel: [
         { value: 'beginner', text: 'PEMULA'},
@@ -147,6 +164,7 @@ export default {
         description: '',
         file: null,
         isActive: true,
+        sinopsis: '',
       }
     },
   },
