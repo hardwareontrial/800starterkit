@@ -23,9 +23,9 @@ export default {
   getters: {
     gaInvPaginate: (state, getters) => (currentPage, itemPerPage, query) => {
       const filteredArray = state.gaInvData.filter(item =>
-          item.kode_brg.toLowerCase().includes(query?.toLowerCase()) ||
-          item.nama_brg.toLowerCase().includes(query?.toLowerCase()) ||
-          item.invloc?.name.toLowerCase().includes(query?.toLowerCase())
+        item.kode_brg.toLowerCase().includes(query?.toLowerCase()) ||
+        item.nama_brg.toLowerCase().includes(query?.toLowerCase()) ||
+        item.invloc?.name.toLowerCase().includes(query?.toLowerCase())
       )
       const countFilteredArray = filteredArray.length
       const totalPages = Math.ceil(countFilteredArray/itemPerPage)
